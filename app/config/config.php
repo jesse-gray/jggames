@@ -15,3 +15,6 @@ define('URLROOT', 'http://localhost/phpwebapp');
 // Site Name
 // Change this to your new name
 define('SITENAME', 'Ecommerce Store');
+
+  // App Version
+  define('APPVERSION', '1.0.0');

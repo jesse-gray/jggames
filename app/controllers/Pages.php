@@ -9,15 +9,17 @@ class Pages extends Controller
     public function index()
     {
         $data = [
-            'title' => 'WatsonMVC',
-        ];
+            'title' => 'Ecommerce Web App',
+            'description' => 'Simple ecommerce web app'
+          ];
         // pass view
         $this->view('pages/index', $data);
     }
 
     public function about()
     {
-        $data = ['title' => 'About Us'];
+        $data = ['title' => 'About Us',
+        'description' => 'Store with a forum'];
         // pass view
         $this->view('pages/about', $data);
     }
