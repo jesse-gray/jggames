@@ -28,6 +28,25 @@
 
     }
 
+    // Login User
+    public function login($email, $password){
+      // get user by email
+      $this->db->query('SELECT * FROM users WHERE email = :email');
+      $this->db->bind(':email', $email);
+
+      $row = $this->db->single();
+
+      // get hashed password
+      $hashed_password = $row->password;
+      // password verify will check password entered against hashed password in db
+      if(password_verify($password, $hashed_password)){
+        return $row;
+      } else {
+        return false;
+      }
+    }
+
+
     // Find user by email
     // used to check if email exists in database
     public function findUserByEmail($email){
