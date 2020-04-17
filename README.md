@@ -117,6 +117,8 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
 # App Set Up
 
 1. Create a table called users in your database enter the following columns
+
+
                 id: int, Auto_Increment, Primary_Key
                 name: VARCHAR(255)
                 email: VARCHAR(255)
