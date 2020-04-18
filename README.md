@@ -124,6 +124,15 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 email: VARCHAR(255)
                 password: VARCHAR(255)
                 created_at: DateTime, default = current timestamp
-    
+
+
+1. Create a table called posts in your database, enter the following columns
+
+
+                id: int, Auto_Increment, Primary_Key
+                user_id: int
+                title: VARCHAR(255)
+                body: text
+                created_at: DateTime, default = current timestamp
 
 

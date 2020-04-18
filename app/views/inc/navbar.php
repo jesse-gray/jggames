@@ -13,6 +13,9 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo URLROOT; ?>/posts">Forum</a>
+        </li>
       </ul>
 
       <ul class="navbar-nav ml-auto">
@@ -24,6 +27,7 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
           </li>
+          
 
         <?php else : ?>
           <!-- Show register and log in if user not logged in -->
@@ -38,3 +42,4 @@
     </div>
   </div>
 </nav>
+
