@@ -11,6 +11,7 @@
   <hr>
   <a href="<?php echo URLROOT; ?>/posts/edit/<?php echo $data['post']->id; ?>" class="btn btn-dark">Edit</a>
 
+<!-- Delete uses form as it is a post request, not a delete request -->
   <form class="pull-right" action="<?php echo URLROOT; ?>/posts/delete/<?php echo $data['post']->id; ?>" method="post">
     <input type="submit" value="Delete" class="btn btn-danger">
   </form>
