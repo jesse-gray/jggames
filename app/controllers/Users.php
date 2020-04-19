@@ -194,17 +194,20 @@
       public function manage(){
         if(!isLoggedIn()){
           redirect('users/login');
-        } else if (!$_SESSION['admin'] > 0){
+        } else if ($_SESSION['admin'] > 0){
+          $users = $this->userModel->getUsers();
+
+          // set data as users
+          $data = [
+            'users' => $users
+          ];
+          $this->view('users/manage', $data);
+          
+        } else {
           redirect('pages/index');
         }
 
-        $users = $this->userModel->getUsers();
-
-        // set data as users
-        $data = [
-          'users' => $users
-        ];
-        $this->view('users/manage', $data);
+        
 
       }
 
@@ -233,7 +236,14 @@
             if($this->userModel->updateUser($data)){
               flash('post_message', 'User Updated');
               // put something here for admin redirect
-              redirect('pages/index');
+              if ($_SESSION['admin'] > 0){
+
+                  redirect('users/manage');
+                
+              } else {
+                redirect('pages/index');
+              }
+              
             } else {
               die('Something went wrong');
             }
@@ -275,6 +285,36 @@
           }
         }
         
+
+      }
+
+      public function delete($id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          if(!isLoggedIn()){
+            redirect('users/login');
+          } else if ($_SESSION['admin'] > 0){
+            // Get existing post from model
+            $post = $this->userModel->getUserById($id);
+            
+            // Check for owner
+            if($post->user_id != $_SESSION['user_id']){
+              redirect('users/login');
+            }
+    
+            if($this->userModel->deleteUser($id)){
+              flash('post_message', 'user Removed');
+              redirect('users/manage');
+            } else {
+              die('Something went wrong');
+            }
+            } else {
+              redirect('pages/index');
+            }
+        } else {
+          redirect('users/login');
+        }
+        
+       
 
       }
   }

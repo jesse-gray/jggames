@@ -21,8 +21,18 @@
             <td><?php echo $user->email ?></td>
             <td><?php echo $user->created_at ?></td>
             <td><?php echo $user->admin > 0 ? 'true' : 'false' ?></td>
-
-            <td class="pull-right"><a href="<?php echo URLROOT; ?>/users/edit/<?php echo $user->id; ?>" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-danger">Delete</a></td>
+            <td class="pull-right">
+            <form  action="<?php echo URLROOT; ?>/users/delete/<?php echo $user->id; ?>" method="post">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
+            </td>
+            <td class="pull-right">
+              <a href="<?php echo URLROOT; ?>/users/edit/<?php echo $user->id; ?>" class="btn btn-primary ">Edit</a> 
+              
+             
+            </td>
+            
+            
           </tr>
       <?php endforeach; ?>
         
