@@ -77,5 +77,14 @@
       return $row;
     }
 
+    // Get all users
+    public function getUsers(){
+      $this->db->query('SELECT * FROM users');
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
     
   }

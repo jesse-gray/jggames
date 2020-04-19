@@ -197,7 +197,14 @@
         } else if (!$_SESSION['admin'] > 0){
           redirect('pages/index');
         }
-        $this->view('users/manage');
+
+        $users = $this->userModel->getUsers();
+
+        // set data as users
+        $data = [
+          'users' => $users
+        ];
+        $this->view('users/manage', $data);
 
       }
   }
