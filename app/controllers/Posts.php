@@ -205,6 +205,62 @@
       }
     }
 
+     // very similar to add
+     public function editComment($id){
+      // edit post with post request
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $comment = $this->commentModel->getCommentById($id);
+
+        $data = [
+          'id' => $id,
+          'body' => trim($_POST['body']),
+          'user_id' => $_SESSION['user_id'],
+          'post_id' => $comment->post_id,
+          'body_err' => ''
+        ];
+
+        // Validate data
+        if(empty($data['body'])){
+          $data['body_err'] = 'Please enter body text';
+        }
+
+        // Make sure no errors
+        if(empty($data['body_err'])){
+          // Validated
+          if($this->commentModel->updateComment($data)){
+            flash('post_message', 'Comment Updated');
+            redirect('posts/show/' . $comment->post_id);
+          } else {
+            die('Something went wrong');
+          }
+        } else {
+          // Load view with errors
+          $this->view('posts/editComment', $data);
+        }
+
+      // show edit page. not a post request
+      } else {
+        // Get existing post from model
+        $comment = $this->commentModel->getCommentById($id);
+
+        // Check for owner. This stops people from entering url to edit posts that arent theirs
+        if($comment->user_id != $_SESSION['user_id']){
+          redirect('posts/show/' . $comment->post_id);
+        }
+
+        $data = [
+          'id' => $id,
+          'body' => $comment->body,
+          'post_id' => $comment->post_id
+        ];
+  
+        $this->view('posts/editComment', $data);
+      }
+    }
+
     public function deleteComment($commentId){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Get existing post from model

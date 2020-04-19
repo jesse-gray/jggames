@@ -29,7 +29,7 @@
             <?php if($comment->commentUserId == $_SESSION['user_id']) : ?>
             <div class="container">
                 <hr>
-                <a href="<?php echo URLROOT; ?>/posts/edit/<?php echo $data['post']->id; ?>" class="btn btn-dark">Edit</a>
+                <a href="<?php echo URLROOT; ?>/posts/editComment/<?php echo $comment->commentId; ?>" class="btn btn-dark">Edit</a>
 
                 <!-- Delete uses form as it is a post request, not a delete request -->
                 <form class="pull-right" action="<?php echo URLROOT; ?>/posts/deleteComment/<?php echo $comment->commentId; ?>" method="post">
