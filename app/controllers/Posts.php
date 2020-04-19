@@ -9,6 +9,7 @@
       // instantiate post
       $this->postModel = $this->model('Post');
       $this->userModel = $this->model('User');
+      $this->commentModel = $this->model('Comment');
     }
 
     public function index(){
@@ -130,10 +131,12 @@
     public function show($id){
       $post = $this->postModel->getPostById($id);
       $user = $this->userModel->getUserById($post->user_id);
+      $comments = $this->commentModel->getCommentsForPost($id);
 
       $data = [
         'post' => $post,
-        'user' => $user
+        'user' => $user,
+        'comments' => $comments
       ];
 
       $this->view('posts/show', $data);
