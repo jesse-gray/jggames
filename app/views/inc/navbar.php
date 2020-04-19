@@ -19,8 +19,15 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
+        
         <!-- Show account and logout if logged in -->
         <?php if (isset($_SESSION['user_id'])) : ?>
+          <?php if ($_SESSION['admin'] > 0) : ?>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Manage Users</a>
+            </li>
+            
+          <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/Index">Welcome <?php echo $_SESSION['user_name']; ?></a>
           </li>

@@ -175,6 +175,7 @@
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
+        $_SESSION['admin'] = $user->admin;
         // from here redirect to which controller and view you would like. this is currently re directing to home page
         redirect('pages/index');
       }
@@ -184,10 +185,19 @@
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_name']);
+        unset($_SESSION['admin']);
         // clears session
         session_destroy();
         redirect('users/login');
       }
   
-      
+      public function manage(){
+        if(!isLoggedIn()){
+          redirect('users/login');
+        } else if (!$_SESSION['admin'] > 0){
+          redirect('pages/index');
+        }
+        $this->view('users/manage');
+
+      }
   }
