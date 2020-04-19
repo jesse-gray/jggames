@@ -207,4 +207,28 @@
         $this->view('users/manage', $data);
 
       }
+
+      public function edit($id){
+        if(!isLoggedIn()){
+          redirect('users/login');
+        } else if ($_SESSION['admin'] > 0){
+          
+          $user = $this->userModel->getUserById($id);
+
+          $data = [
+            'user' => $user
+          ];
+          $this->view('users/edit', $data);
+        } else if($_SESSION['user_id'] === $id){
+          $user = $this->userModel->getUserById($id);
+
+          $data = [
+            'user' => $user
+          ];
+          $this->view('users/edit', $data);
+        } else {
+          redirect('pages/index');
+        }
+
+      }
   }
