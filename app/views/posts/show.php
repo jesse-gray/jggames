@@ -32,7 +32,7 @@
                 <a href="<?php echo URLROOT; ?>/posts/edit/<?php echo $data['post']->id; ?>" class="btn btn-dark">Edit</a>
 
                 <!-- Delete uses form as it is a post request, not a delete request -->
-                <form class="pull-right" action="<?php echo URLROOT; ?>/posts/delete/<?php echo $data['post']->id; ?>" method="post">
+                <form class="pull-right" action="<?php echo URLROOT; ?>/posts/deleteComment/<?php echo $comment->commentId; ?>" method="post">
                     <input type="submit" value="Delete" class="btn btn-danger">
                 </form>
             </div>
@@ -44,5 +44,10 @@
         
     <br>
     <?php endforeach; ?>
+    <div class="col-md-6">
+      <a href="<?php echo URLROOT; ?>/posts/addComment/<?php echo $data['post']->id; ?>"  class="btn btn-primary pull-right">
+        <i class="fa fa-pencil"></i> Add Comment
+      </a>
+    </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

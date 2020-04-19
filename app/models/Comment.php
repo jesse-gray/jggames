@@ -29,27 +29,43 @@
         return $results;
       }
 
+      public function getCommentById($id){
+        $this->db->query('SELECT * FROM comments WHERE id = :id');
+        $this->db->bind(':id', $id);
+  
+        $row = $this->db->single();
+  
+        return $row;
+      }
 
+      public function addComment($data){
+        $this->db->query('INSERT INTO comments ( user_id, post_id, body) VALUES(:user_id, :post_id, :body)');
+        // Bind values
+        $this->db->bind(':user_id', $data['user_id']);
+        $this->db->bind(':post_id', $data['post_id']);
+        $this->db->bind(':body', $data['body']);
+  
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+      }
 
-    //   SELECT  
-    //                 posts.id as postId,
-    //                 posts.created_at as postCreated,
-    //                 posts.body as postBody,
-    //                 posts.user_id as postUserId,
-    //                 comments.id as commentId,
-    //                 comments.user_id as commentUserId,
-    //                 comments.post_id as commentPostId,
-    //                 comments.body as commentBody,
-    //                 usersPost.name as postUserName,
-    //                 usersComment.name as commentUserName
-    //                 FROM posts
-    //                 LEFT JOIN comments
-    //                 ON posts.id = comments.post_id
-    //                 LEFT JOIN users as usersPost
-    //                 ON posts.user_id = usersPost.id
-    //                 LEFT JOIN users as usersComment
-    //                 ON comments.user_id = usersComment.id
-    //                 WHERE posts.id = :id
+      public function deleteComment($id){
+        $this->db->query('DELETE FROM comments WHERE id = :id');
+        // Bind values
+        $this->db->bind(':id', $id);
+  
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+      }
+   
     
   }
 

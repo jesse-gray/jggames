@@ -162,4 +162,67 @@
         redirect('posts');
       }
     }
+
+    // add new comment
+    public function addComment($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'body' => trim($_POST['body']),
+          'user_id' => $_SESSION['user_id'],
+          'post_id' => $id,
+          'body_err' => ''
+        ];
+
+        // Validate data
+        if(empty($data['body'])){
+          $data['body_err'] = 'Please enter body text';
+        }
+
+        // Make sure no errors
+        if(empty($data['body_err'])){
+          // Validated
+          if($this->commentModel->addComment($data)){
+            flash('post_message', 'Post Added');
+            redirect('posts/show/' . $id);
+          } else {
+            die('Something went wrong');
+          }
+        } else {
+          // Load view with errors
+          $this->view('posts/addComment', $data);
+        }
+
+      } else {
+        $data = [
+          'post_id' => $id,
+          'body' => ''
+        ];
+  
+        $this->view('posts/addComment', $data);
+      }
+    }
+
+    public function deleteComment($commentId){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Get existing post from model
+        $comment = $this->commentModel->getCommentById($commentId);
+        
+        // Check for owner
+        if($comment->user_id != $_SESSION['user_id']){
+          redirect('posts/show/');
+        }
+
+        if($this->commentModel->deleteComment($commentId)){
+          flash('post_message', 'Comment Removed');
+          redirect('posts/show/' . $comment->post_id);
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        redirect('posts/show/');
+      }
+    }
   }
