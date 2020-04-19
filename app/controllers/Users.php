@@ -209,26 +209,72 @@
       }
 
       public function edit($id){
-        if(!isLoggedIn()){
-          redirect('users/login');
-        } else if ($_SESSION['admin'] > 0){
-          
-          $user = $this->userModel->getUserById($id);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
           $data = [
-            'user' => $user
+            'id' => $id,
+            'name' => trim($_POST['name']),
+            'email' => trim($_POST['email']),
+            'name_err' => '',
+            'email_err' => ''
           ];
-          $this->view('users/edit', $data);
-        } else if($_SESSION['user_id'] === $id){
-          $user = $this->userModel->getUserById($id);
+  
+          // Validate data
+          if(empty($data['name'])){
+            $data['name_err'] = 'Please enter name';
+          }
+          if(empty($data['email'])){
+            $data['email_err'] = 'Please enter email';
+          }
+  
+          // Make sure no errors
+          if(empty($data['name_err']) && empty($data['email_err'])){
+            // Validated
+            if($this->userModel->updateUser($data)){
+              flash('post_message', 'User Updated');
+              // put something here for admin redirect
+              redirect('pages/index');
+            } else {
+              die('Something went wrong');
+            }
+          } else {
+            // Load view with errors
+            $this->view('users/edit', $data);
+          }
 
-          $data = [
-            'user' => $user
-          ];
-          $this->view('users/edit', $data);
         } else {
-          redirect('pages/index');
+          if(!isLoggedIn()){
+            redirect('users/login');
+          } else if ($_SESSION['admin'] > 0){
+            
+            $user = $this->userModel->getUserById($id);
+  
+            $data = [
+              'id' => $user->id,
+              'name' => $user->name,
+              'email' => $user->email,
+              'admin' => $user->admin > 0 ? 'TRUE' : 'FALSE',
+              'name_err' => '',
+              'email_err' => ''
+            ];
+            $this->view('users/edit', $data);
+          } else if($_SESSION['user_id'] === $id){
+            $user = $this->userModel->getUserById($id);
+  
+            $data = [
+              'id' => $user->id,
+              'name' => $user->name,
+              'email' => $user->email,
+              'admin' => FALSE,
+              'name_err' => '',
+              'email_err' => ''
+            ];
+            $this->view('users/edit', $data);
+          } else {
+            redirect('pages/index');
+          }
         }
+        
 
       }
   }

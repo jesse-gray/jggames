@@ -86,5 +86,20 @@
       return $results;
     }
 
+    public function updateUser($data){
+      $this->db->query('UPDATE users SET name = :name, email = :email WHERE id = :id');
+      // Bind values
+      $this->db->bind(':id', $data['id']);
+      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':email', $data['email']);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     
   }
