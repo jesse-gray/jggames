@@ -124,6 +124,7 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 email: VARCHAR(255)
                 password: VARCHAR(255)
                 created_at: DateTime, default = current timestamp
+                admin: BOOLEAN, default = 0
 
 
 1. Create a table called posts in your database, enter the following columns
