@@ -145,4 +145,13 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 body: text
                 created_at: DateTime, default = current timestamp
 
+1. Create a table called products in your database, enter the following columns
+
+
+                id: int, Auto_Increment, Primary_Key
+                name: VARCHAR(255)
+                quantity: int
+                price: int
+                description: text
+
 
