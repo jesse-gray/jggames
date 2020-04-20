@@ -116,6 +116,8 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
 
 # App Set Up
 
+## Database Set Up
+
 1. Create a table called users in your database enter the following columns
 
 
@@ -153,5 +155,12 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 quantity: int
                 price: int
                 description: text
+
+
+## Webapp Set Up
+
+1. In your browser go to http://localhost/phpwebapp.
+
+1. Register user.
 
 
