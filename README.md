@@ -1,5 +1,11 @@
-# watsonmvc
-This is a PHP MVC framework
+# phpwebapp
+
+This is a PHP MVC web application
+This application is a eccomerce store with a user forum
+
+A login is required for accesing the forum
+
+An admin account is required for user or product editing
 
 
 # Initial set up
@@ -162,5 +168,9 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
 1. In your browser go to http://localhost/phpwebapp.
 
 1. Register user.
+
+1. Go to phpmyadmin and edit your user.
+
+1. Change the admin of your user from 0 to 1.
 
 
