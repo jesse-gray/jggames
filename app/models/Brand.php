@@ -53,6 +53,15 @@
       return $row;
     }
 
+    public function getBrandByName($name){
+      $this->db->query('SELECT * FROM brand WHERE name = :name');
+      $this->db->bind(':name', $name);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
 
     public function deleteBrand($id){
       $this->db->query('DELETE FROM brand WHERE id = :id');

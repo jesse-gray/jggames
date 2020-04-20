@@ -53,6 +53,15 @@
       return $row;
     }
 
+    public function getCategoryByName($name){
+        $this->db->query('SELECT * FROM category WHERE name = :name');
+        $this->db->bind(':name', $name);
+  
+        $row = $this->db->single();
+  
+        return $row;
+      }
+
 
     public function deleteCategory($id){
       $this->db->query('DELETE FROM category WHERE id = :id');
