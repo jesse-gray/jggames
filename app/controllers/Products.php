@@ -6,6 +6,11 @@
         redirect('users/login');
       }
 
+        // Check for admin
+        if(!$_SESSION['admin'] > 0){
+            redirect('pages');
+        }
+
       // instantiate product
       $this->productModel = $this->model('Product');
     }
@@ -158,7 +163,7 @@
 
           // Check for admin
         if(!$_SESSION['admin'] > 0){
-            redirect('products');
+            redirect('pages/index');
         }
 
 
