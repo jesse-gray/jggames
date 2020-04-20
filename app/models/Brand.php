@@ -44,7 +44,7 @@
       }
     }
 
-    public function getCategorryById($id){
+    public function getBrandById($id){
       $this->db->query('SELECT * FROM brand WHERE id = :id');
       $this->db->bind(':id', $id);
 

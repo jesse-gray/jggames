@@ -27,6 +27,9 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
             </li>
             <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/brands/index">Brands</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
             </li>
             <li class="nav-item">
