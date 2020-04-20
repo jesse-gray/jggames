@@ -161,6 +161,22 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 quantity: int
                 price: int
                 description: text
+                category_id: int
+                brand_id: int
+
+
+1. Create a table called category in your database enter the following columns
+
+
+                id: int, Auto_Increment, Primary_Key
+                name: VARCHAR(255)
+                
+
+1. Create a table called brand in your database enter the following columns
+
+
+                id: int, Auto_Increment, Primary_Key
+                name: VARCHAR(255)
 
 
 ## Webapp Set Up

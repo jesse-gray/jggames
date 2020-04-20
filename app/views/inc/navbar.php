@@ -24,6 +24,9 @@
         <?php if (isset($_SESSION['user_id'])) : ?>
           <?php if ($_SESSION['admin'] > 0) : ?>
             <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
             </li>
             <li class="nav-item">

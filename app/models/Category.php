@@ -44,7 +44,7 @@
       }
     }
 
-    public function getCategorryById($id){
+    public function getCategoryById($id){
       $this->db->query('SELECT * FROM category WHERE id = :id');
       $this->db->bind(':id', $id);
 
