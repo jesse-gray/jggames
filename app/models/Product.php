@@ -57,6 +57,25 @@
       return $row;
     }
 
+    public function getProductByCategoryId($id){
+      $this->db->query('SELECT * FROM products WHERE category_id = :id');
+      $this->db->bind(':id', $id);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+    public function getProductByBrandId($id){
+      $this->db->query('SELECT * FROM products WHERE brand_id = :id');
+      $this->db->bind(':id', $id);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
     public function deleteProduct($id){
       $this->db->query('DELETE FROM products WHERE id = :id');
       // Bind values
