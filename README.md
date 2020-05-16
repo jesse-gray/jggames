@@ -31,7 +31,9 @@ An admin account is required for user or product editing
 
 1. Create a file called index.php.
 
-1. In that file add the following php code: <?php echo 'IT WORKS'; ?>
+1. In that file add the following php code: 
+
+            <?php echo 'IT WORKS'; ?>
 
 1. In your browser go to http://localhost/test.
 
