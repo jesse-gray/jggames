@@ -8,6 +8,7 @@ class Pages extends Controller
         // instantiate models
         $this->categoryModel = $this->model('Category');
         $this->brandModel = $this->model('Brand');
+        $this->productModel = $this->model('Product');
     }
 
     public function index()
@@ -18,11 +19,17 @@ class Pages extends Controller
         // Get brands
         $brands = $this->brandModel->getBrands();
 
+        // Get Products
+        $products = $this->productModel->getProducts();
+
+
+
         $data = [
             'title' => 'Ecommerce Web App',
             'description' => 'Simple ecommerce web app',
             'categories' => $categories,
-            'brands' => $brands
+            'brands' => $brands,
+            'products' => $products
           ];
         // pass view
         $this->view('pages/index', $data);
