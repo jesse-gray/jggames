@@ -35,4 +35,12 @@ class Pages extends Controller
         // pass view
         $this->view('pages/about', $data);
     }
+
+    public function dashboard()
+    {
+        $data = ['title' => 'Dashboard',
+        'description' => 'Admin Dashboard'];
+        // pass view
+        $this->view('pages/dashboard', $data);
+    }
 }
