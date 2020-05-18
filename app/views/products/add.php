@@ -16,6 +16,12 @@
       <textarea name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['description']; ?></textarea>
       <span class="invalid-feedback"><?php echo $data['description_err']; ?></span>
     </div>
+    <!-- IMAGE -->
+    <div class="form-group">
+      <label for="image_link">image_link: <sup>*</sup></label>
+      <textarea name="image_link" class="form-control form-control-lg <?php echo (!empty($data['image_link_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['image_link']; ?></textarea>
+      <span class="invalid-feedback"><?php echo $data['image_link_err']; ?></span>
+    </div>
     <!-- QUANTITY -->
     <div class="form-group">
       <label for="quantity">Quantity: <sup>*</sup></label>

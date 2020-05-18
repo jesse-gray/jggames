@@ -1,0 +1,10 @@
+.home-grid-area{
+    display: grid;
+    overflow: hidden;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: min-content;
+    row-gap: 0.25rem;
+    column-gap: 1rem;
+
+}
+

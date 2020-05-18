@@ -165,6 +165,7 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 description: text
                 category_id: int
                 brand_id: int
+                image_link: VARCHAR(255)
 
 
 1. Create a table called category in your database enter the following columns

@@ -48,6 +48,7 @@
           'quantity' => trim($_POST['quantity']),
           'price' => trim($_POST['price']),
           'description' => trim($_POST['description']),
+          'image_link' => trim($_POST['image_link']),
           'brands' => $brands,
           'brand' => trim($_POST['brand']),
           'categories' => $categories,
@@ -56,6 +57,7 @@
           'quantity_err' => '',
           'price_err' => '',
           'description_err' => '',
+          'image_link_err' => '',
           'brand_err' => '',
           'category_err' => ''
         ];
@@ -73,6 +75,9 @@
         if(empty($data['description'])){
           $data['description_err'] = 'Please enter description';
         }
+        if(empty($data['image_link'])){
+          $data['image_link_err'] = 'Please enter image link';
+        }
         if($data['brand'] === 'Choose...'){
           $data['brand_err'] = 'Please enter brand';
         }
@@ -81,7 +86,7 @@
         }
 
         // Make sure no errors
-        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['brand_err']) && empty($data['category_err'])){
+        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['image_link_err']) && empty($data['brand_err']) && empty($data['category_err'])){
           // Validated
 
           $brand = $this->brandModel->getBrandByName($data['brand']);
@@ -92,6 +97,7 @@
             'quantity' => $data['quantity'],
             'price' => $data['price'],
             'description' => $data['description'],
+            'image_link' => $data['image_link'],
             'brand_id' => $brand->id,
             'category_id' => $category->id
           ];
@@ -112,6 +118,7 @@
           'quantity' => '',
           'price' => '',
           'description' => '',
+          'image_link' => '',
           'brand' => '',
           'brands' => $brands,
           'category' => '',
@@ -138,6 +145,7 @@
           'quantity' => trim($_POST['quantity']),
           'price' => trim($_POST['price']),
           'description' => trim($_POST['description']),
+          'image_link' => trim($_POST['image_link']),
           'brands' => $brands,
           'brand' => trim($_POST['brand']),
           'categories' => $categories,
@@ -146,6 +154,7 @@
           'quantity_err' => '',
           'price_err' => '',
           'description_err' => '',
+          'image_link_err' => '',
           'brand_err' => '',
           'category_err' => ''
       ];
@@ -163,6 +172,9 @@
       if(empty($data['description'])){
         $data['description_err'] = 'Please enter description';
       }
+      if(empty($data['image_link'])){
+        $data['image_link_err'] = 'Please enter image link';
+      }
       if($data['brand'] === 'Choose...'){
         $data['brand_err'] = 'Please enter brand';
       }
@@ -171,7 +183,7 @@
       }
 
         // Make sure no errors
-        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['brand_err']) && empty($data['category_err'])){
+        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['image_link_err']) && empty($data['brand_err']) && empty($data['category_err'])){
             // Validated
 
             $brand = $this->brandModel->getBrandByName($data['brand']);
@@ -183,6 +195,7 @@
               'quantity' => $data['quantity'],
               'price' => $data['price'],
               'description' => $data['description'],
+              'image_link' => $data['image_link'],
               'brand_id' => $brand->id,
               'category_id' => $category->id
             ];
@@ -211,6 +224,7 @@
           'quantity' =>  $product->quantity,
           'price' =>  $product->price,
           'description' =>  $product->description,
+          'image_link' =>  $product->image_link,
           'brand' => $brand->name,
           'brands' => $brands,
           'category' => $category->name,
