@@ -92,6 +92,30 @@
         return false;
       }
     }
+    
 
+    public function getCartProducts($id){
+      $this->db->query('SELECT * FROM products JOIN cart_line ON products.id = cart_line.product_id JOIN cart ON cart_line.id = cart.id WHERE cart.user_id = :id');
+      // Bind values
+      $this->db->bind(':id', $id);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+
+    public function removeProductFromCart($id){
+      $this->db->query('DELETE FROM cart_line WHERE id = :id');
+      // Bind values
+      $this->db->bind(':id', $id);
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
     
   }

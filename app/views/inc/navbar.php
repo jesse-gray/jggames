@@ -13,6 +13,18 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
         </li>
+          <?php if ($_SESSION['admin'] > 0) : ?>
+        <li class="nav-item">
+        <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?php echo URLROOT; ?>/brands/index">Brands</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
+        </li>
+            
+          <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/posts">Forum</a>
         </li>
@@ -24,21 +36,15 @@
         <?php if (isset($_SESSION['user_id'])) : ?>
           <?php if ($_SESSION['admin'] > 0) : ?>
             <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/brands/index">Brands</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
-            </li>
-            <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Manage Users</a>
             </li>
             
           <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/edit/<?php echo $_SESSION['user_id']; ?>">Welcome <?php echo $_SESSION['user_name']; ?></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/cart/index">Shopping Cart</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
