@@ -14,13 +14,16 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
             </li>
             <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/brands/index">Brands</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/genres/index">Genres</a>
             </li>
             <li class="list-group-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
             </li>
             <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Manage Users</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Users</a>
+            </li>
+            <li class="list-group-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/orders/manage">Orders</a>
             </li>
 
   </ul>

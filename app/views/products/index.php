@@ -16,6 +16,7 @@
     <div class="card card-body mb-3">
       <h4 class="card-title"><?php echo $product->name; ?></h4>
       <p class="card-text"><?php echo $product->description; ?></p>
+      <small class="text-muted mb-3">Quantity Remaining: <?php echo $product->quantity; ?></small>
       <a href="<?php echo URLROOT; ?>/products/show/<?php echo $product->id; ?>" class="btn btn-dark">More</a>
     </div>
   <?php endforeach; ?>

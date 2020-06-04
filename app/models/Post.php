@@ -9,13 +9,17 @@
     public function getPosts(){
       //$this->db->query('SELECT * FROM posts');
       $this->db->query('SELECT *,
+                        posts.body as postBody,
                         posts.id as postId,
                         users.id as userId,
                         posts.created_at as postCreated,
-                        users.created_at as userCreated
+                        users.created_at as userCreated,
+                        count(comments.id) as replyCount
                         FROM posts
                         INNER JOIN users
                         ON posts.user_id = users.id
+                        LEFT JOIN comments
+                        ON posts.id = comments.post_id
                         ORDER BY posts.created_at DESC
                         ');
 

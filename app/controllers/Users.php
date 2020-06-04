@@ -7,8 +7,7 @@
     public function register(){
       // Check for POST method
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Process form
-  
+        // Process form  
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -70,8 +69,8 @@
           // Register User
           // if for checking it went well
           if($this->userModel->register($data)){
-              flash('register_success', 'You are registered and can log in');
-            redirect('/users/login');
+              flash('register_success', 'You are successfully registered, please check your email for a verification link');
+            //redirect('/users/login');
           } else {
             die('Something went wrong');
           }
@@ -110,7 +109,7 @@
             'email' => trim($_POST['email']),
             'password' => trim($_POST['password']),
             'email_err' => '',
-            'password_err' => '',      
+            'password_err' => '',     
           ];
   
           // Validate Email
@@ -129,6 +128,14 @@
           } else {
             // User not found
             $data['email_err'] = 'No user found';
+          }
+
+          //Check user is verified
+          if($this->userModel->isUserVerified($data['email'])){
+            //User verified
+          } else {
+            //Not verified
+            $data['email_err'] = 'Email is not verified, please check your emails';
           }
   
           // Make sure errors are empty
@@ -206,21 +213,26 @@
         } else {
           redirect('pages/index');
         }
-
-        
-
       }
 
       public function edit($id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+          var_dump($_POST);
           $data = [
             'id' => $id,
             'name' => trim($_POST['name']),
             'email' => trim($_POST['email']),
+            'password' => trim($_POST['password']),
+            'confirm_password' => trim($_POST['confirm_password']),
+            'is_admin' => trim($_POST['is_admin']),
             'name_err' => '',
-            'email_err' => ''
+            'email_err' => '',
+            'password_err' => '',
+            'confirm_password_err' => ''
           ];
+
+          
   
           // Validate data
           if(empty($data['name'])){
@@ -229,13 +241,24 @@
           if(empty($data['email'])){
             $data['email_err'] = 'Please enter email';
           }
+          if(empty($data['password'])){
+            $data['password_err'] = 'Please enter a valid password';
+          }
+          if(strlen($data['password']) < 6){
+            $data['password_err'] = 'Password must be at least 6 characters long';
+          }
+          if(($data['confirm_password'] != $data['password'])){
+            $data['confirm_password_err'] = 'Passwords dont match';
+          }
   
           // Make sure no errors
-          if(empty($data['name_err']) && empty($data['email_err'])){
+          if(empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
             // Validated
+            // Hash Password
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);            
             if($this->userModel->updateUser($data)){
               flash('post_message', 'User Updated');
-              // put something here for admin redirect
+              // Admin redirect
               if ($_SESSION['admin'] > 0){
 
                   redirect('users/manage');
@@ -263,9 +286,12 @@
               'id' => $user->id,
               'name' => $user->name,
               'email' => $user->email,
+              'password' => $user->password,
               'admin' => $user->admin > 0 ? 'TRUE' : 'FALSE',
               'name_err' => '',
-              'email_err' => ''
+              'email_err' => '',
+              'password_err' => '',
+              'confirm_password_err' => ''
             ];
             $this->view('users/edit', $data);
           } else if($_SESSION['user_id'] === $id){
@@ -275,9 +301,12 @@
               'id' => $user->id,
               'name' => $user->name,
               'email' => $user->email,
+              'password' => $user->password,
               'admin' => FALSE,
               'name_err' => '',
-              'email_err' => ''
+              'email_err' => '',
+              'password_err' => '',
+              'confirm_password_err' => ''
             ];
             $this->view('users/edit', $data);
           } else {
@@ -292,29 +321,25 @@
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
           if(!isLoggedIn()){
             redirect('users/login');
-          } else if ($_SESSION['admin'] > 0){
-            // Get existing post from model
-            $post = $this->userModel->getUserById($id);
-            
-            // Check for owner
-            if($post->user_id != $_SESSION['user_id']){
-              redirect('users/login');
-            }
-    
+          } else{                
             if($this->userModel->deleteUser($id)){
               flash('post_message', 'user Removed');
-              redirect('users/manage');
+              return $this->logout();
             } else {
               die('Something went wrong');
             }
-            } else {
-              redirect('pages/index');
             }
         } else {
           redirect('users/login');
         }
-        
-       
+      }
 
+      public function confirm($token){
+        if($this->userModel->confirmEmail($token)){
+          flash('post_message', 'Email verified');
+          redirect('users/login');
+        } else {
+          die('Something went wrong');
+        }
       }
   }

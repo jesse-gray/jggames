@@ -14,8 +14,8 @@
       // instantiate product
       $this->productModel = $this->model('Product');
 
-      // instantiate brand
-      $this->brandModel = $this->model('Brand');
+      // instantiate genre
+      $this->genreModel = $this->model('Genre');
 
       // instantiate category
       $this->categoryModel = $this->model('Category');
@@ -33,10 +33,10 @@
       $this->view('products/index', $data);
     }
 
-    // add new post
+    // add new product
     public function add(){
 
-      $brands = $this->brandModel->getBrands();
+      $genres = $this->genreModel->getGenres();
       $categories = $this->categoryModel->getCategories();
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -47,18 +47,20 @@
           'name' => trim($_POST['name']),
           'quantity' => trim($_POST['quantity']),
           'price' => trim($_POST['price']),
+          'long_description' => trim($_POST['long_description']),
           'description' => trim($_POST['description']),
           'image_link' => trim($_POST['image_link']),
-          'brands' => $brands,
-          'brand' => trim($_POST['brand']),
+          'genres' => $genres,
+          'genre' => trim($_POST['genre']),
           'categories' => $categories,
           'category' => trim($_POST['category']),
           'name_err' => '',
           'quantity_err' => '',
           'price_err' => '',
           'description_err' => '',
+          'long_description_err' => '',
           'image_link_err' => '',
-          'brand_err' => '',
+          'genre_err' => '',
           'category_err' => ''
         ];
 
@@ -75,21 +77,24 @@
         if(empty($data['description'])){
           $data['description_err'] = 'Please enter description';
         }
+        if(empty($data['long_description'])){
+          $data['long_description_err'] = 'Please enter a long description';
+        }
         if(empty($data['image_link'])){
           $data['image_link_err'] = 'Please enter image link';
         }
-        if($data['brand'] === 'Choose...'){
-          $data['brand_err'] = 'Please enter brand';
+        if($data['genre'] === 'Choose...'){
+          $data['genre_err'] = 'Please enter genre';
         }
         if($data['category'] === 'Choose...'){
           $data['category_err'] = 'Please enter category';
         }
 
         // Make sure no errors
-        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['image_link_err']) && empty($data['brand_err']) && empty($data['category_err'])){
+        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['long_description_err']) && empty($data['image_link_err']) && empty($data['genre_err']) && empty($data['category_err'])){
           // Validated
 
-          $brand = $this->brandModel->getBrandByName($data['brand']);
+          $genre = $this->genreModel->getGenreByName($data['genre']);
           $category = $this->categoryModel->getcategoryByName($data['category']);
 
           $newProduct = [
@@ -97,8 +102,9 @@
             'quantity' => $data['quantity'],
             'price' => $data['price'],
             'description' => $data['description'],
+            'long_description' => $data['long_description'],
             'image_link' => $data['image_link'],
-            'brand_id' => $brand->id,
+            'genre_id' => $genre->id,
             'category_id' => $category->id
           ];
           if($this->productModel->addProduct($newProduct)){
@@ -118,9 +124,10 @@
           'quantity' => '',
           'price' => '',
           'description' => '',
+          'long_description' => '',
           'image_link' => '',
-          'brand' => '',
-          'brands' => $brands,
+          'genre' => '',
+          'genres' => $genres,
           'category' => '',
           'categories' => $categories
         ];
@@ -132,7 +139,7 @@
     // very similar to add
     public function edit($id){
 
-      $brands = $this->brandModel->getBrands();
+      $genres = $this->genreModel->getGenres();
       $categories = $this->categoryModel->getCategories();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -145,17 +152,19 @@
           'quantity' => trim($_POST['quantity']),
           'price' => trim($_POST['price']),
           'description' => trim($_POST['description']),
+          'long_description' => trim($_POST['long_description']),
           'image_link' => trim($_POST['image_link']),
-          'brands' => $brands,
-          'brand' => trim($_POST['brand']),
+          'genres' => $genres,
+          'genre' => trim($_POST['genre']),
           'categories' => $categories,
           'category' => trim($_POST['category']),
           'name_err' => '',
           'quantity_err' => '',
           'price_err' => '',
+          'long_description_err' => '',
           'description_err' => '',
           'image_link_err' => '',
-          'brand_err' => '',
+          'genre_err' => '',
           'category_err' => ''
       ];
 
@@ -172,21 +181,24 @@
       if(empty($data['description'])){
         $data['description_err'] = 'Please enter description';
       }
+      if(empty($data['long_description'])){
+        $data['long_description_err'] = 'Please enter a long description';
+      }
       if(empty($data['image_link'])){
         $data['image_link_err'] = 'Please enter image link';
       }
-      if($data['brand'] === 'Choose...'){
-        $data['brand_err'] = 'Please enter brand';
+      if($data['genre'] === 'Choose...'){
+        $data['genre_err'] = 'Please enter genre';
       }
       if($data['category'] === 'Choose...'){
         $data['category_err'] = 'Please enter category';
       }
 
         // Make sure no errors
-        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['image_link_err']) && empty($data['brand_err']) && empty($data['category_err'])){
+        if(empty($data['name_err']) && empty($data['quantity_err']) && empty($data['price_err']) && empty($data['description_err']) && empty($data['long_description_err']) && empty($data['image_link_err']) && empty($data['genre_err']) && empty($data['category_err'])){
             // Validated
 
-            $brand = $this->brandModel->getBrandByName($data['brand']);
+            $genre = $this->genreModel->getGenreByName($data['genre']);
             $category = $this->categoryModel->getcategoryByName($data['category']);
 
             $newProduct = [
@@ -195,8 +207,9 @@
               'quantity' => $data['quantity'],
               'price' => $data['price'],
               'description' => $data['description'],
+              'long_description' => $data['long_description'],
               'image_link' => $data['image_link'],
-              'brand_id' => $brand->id,
+              'genre_id' => $genre->id,
               'category_id' => $category->id
             ];
 
@@ -215,7 +228,7 @@
       } else {
         // Get existing product from model
         $product = $this->productModel->getProductById($id);
-        $brand = $this->brandModel->getBrandById($product->brand_id);
+        $genre = $this->genreModel->getGenreById($product->genre_id);
         $category = $this->categoryModel->getCategoryById($product->category_id);
 
         $data = [
@@ -224,9 +237,10 @@
           'quantity' =>  $product->quantity,
           'price' =>  $product->price,
           'description' =>  $product->description,
+          'long_description' =>  $product->long_description,
           'image_link' =>  $product->image_link,
-          'brand' => $brand->name,
-          'brands' => $brands,
+          'genre' => $genre->name,
+          'genres' => $genres,
           'category' => $category->name,
           'categories' => $categories,
         ];
@@ -265,4 +279,41 @@
       }
     }
 
+    public function shop(){
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'text_search' => trim($_POST['text_search']),      
+          'min_price_search' => trim($_POST['min_price_search']),  
+          'max_price_search' => trim($_POST['max_price_search']),   
+        ];
+
+        $products = $this->productModel->getProductBySearch($data);
+
+        $afterData = [
+          'products' => $products,
+          'text_search' => '',
+          'min_price_search' => '',
+          'max_price_search' => ''
+        ];
+        // pass view
+        $this->view('products/shop', $afterData);
+
+
+      } else {
+        // Get Products
+        $products = $this->productModel->getProducts();
+
+        $data = [
+          'products' => $products,
+          'text_search' => '',
+          'min_price_search' => '',
+          'max_price_search' => ''
+        ];
+        // pass view
+        $this->view('products/shop', $data);
+      }
+    }
   }

@@ -1,11 +1,6 @@
 <?php
   class Posts extends Controller {
     public function __construct(){
-      // this makes all forums only for logged in users
-      if(!isLoggedIn()){
-        redirect('users/login');
-      }
-
       // instantiate post
       $this->postModel = $this->model('Post');
       $this->userModel = $this->model('User');

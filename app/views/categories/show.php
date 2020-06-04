@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<a href="<?php echo URLROOT; ?>/categories" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
 <br>
 <h1><?php echo $data['category']->name; ?></h1>
 
@@ -14,6 +13,7 @@
   </form>
   <br>
 <?php endif; ?>
+<a href="<?php echo URLROOT; ?>/categories" class="btn btn-dark mt-3"><i class="fa fa-backward"></i> Back</a>
 
 
 

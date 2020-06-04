@@ -20,4 +20,30 @@
 
       $this->view('cart/index', $data);
     }
+
+    public function add($id){
+       echo "<script>console.log('Controller: $id');</script>";
+
+          if($this->productModel->addProductToCart($_SESSION['user_id'], $id)){
+            flash('post_message', 'Product Added To Cart');
+            redirect('');
+          } else {  
+            die('Something went wrong');
+          }
+
+      $this->view('product/index', $data);
+    }
+
+    public function remove($id){
+       echo "<script>console.log('$id');</script>";
+          if($this->productModel->removeProductFromCart($_SESSION['user_id'], $id)){
+            flash('post_message', 'Product Removed From Cart');
+            redirect('cart');
+          } else {
+            die('Something went wrong');
+          }
+
+
+      $this->view('cart/index', $data);
+    }
   }

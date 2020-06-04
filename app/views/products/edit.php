@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<a href="<?php echo URLROOT; ?>/products" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
 <div class="card card-body bg-light mt-5">
   <h2>Add Product</h2>
   <p>Create a product with this form</p>
@@ -13,6 +12,11 @@
       <label for="description">description: <sup>*</sup></label>
       <textarea name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['description']; ?></textarea>
       <span class="invalid-feedback"><?php echo $data['description_err']; ?></span>
+    </div>
+    <div class="form-group">
+      <label for="long_description">long_description: <sup>*</sup></label>
+      <textarea name="long_description" class="form-control form-control-lg <?php echo (!empty($data['long_description_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['long_description']; ?></textarea>
+      <span class="invalid-feedback"><?php echo $data['long_description_err']; ?></span>
     </div>
     <div class="form-group">
       <label for="image_link">image link: <sup>*</sup></label>
@@ -32,15 +36,15 @@
     <!-- BRAND -->
     <div class="form-group">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Brand</label>
+        <label class="input-group-text" for="inputGroupSelect01">Genre</label>
       </div>
-      <select name="brand" class="custom-select form-control form-control-lg <?php echo (!empty($data['brand_err'])) ? 'is-invalid' : ''; ?>" id="inputGroupSelect01">
-        <option <?php echo $data['brand'] === 'Choose...' ? 'selected' : '' ?>>Choose...</option>
-        <?php foreach ($data['brands'] as $brand) : ?>
-          <option <?php echo $data['brand'] === $brand->name ? 'selected' : '' ?> value="<?php echo $brand->name ?>"><?php echo $brand->name ?></option>
+      <select name="genre" class="custom-select form-control form-control-lg <?php echo (!empty($data['genre_err'])) ? 'is-invalid' : ''; ?>" id="inputGroupSelect01">
+        <option <?php echo $data['genre'] === 'Choose...' ? 'selected' : '' ?>>Choose...</option>
+        <?php foreach ($data['genres'] as $genre) : ?>
+          <option <?php echo $data['genre'] === $genre->name ? 'selected' : '' ?> value="<?php echo $genre->name ?>"><?php echo $genre->name ?></option>
         <?php endforeach; ?>
       </select>
-      <span class="invalid-feedback"><?php echo $data['brand_err']; ?></span>
+      <span class="invalid-feedback"><?php echo $data['genre_err']; ?></span>
     </div>
     <!-- CATEGORY -->
     <div class="form-group">
@@ -58,4 +62,5 @@
     <input type="submit" class="btn btn-success" value="Submit">
   </form>
 </div>
+<a href="<?php echo URLROOT; ?>/products" class="btn btn-dark m-3"><i class="fa fa-backward"></i> Back</a>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

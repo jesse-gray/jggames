@@ -1,5 +1,5 @@
 <?php
-  class Brands extends Controller {
+  class Genres extends Controller {
     public function __construct(){
       // this makes all forums only for logged in users
       if(!isLoggedIn()){
@@ -11,23 +11,23 @@
             redirect('pages');
         }
 
-      // instantiate brand
-      $this->brandModel = $this->model('Brand');
+      // instantiate genre
+      $this->genreModel = $this->model('Genre');
     }
 
     public function index(){
-      // Get brands
-      $brands = $this->brandModel->getBrands();
+      // Get genres
+      $genres = $this->genreModel->getGenres();
 
-      // set data as brands
+      // set data as genre
       $data = [
-        'brands' => $brands
+        'genres' => $genres
       ];
 
-      $this->view('brands/index', $data);
+      $this->view('genres/index', $data);
     }
 
-    // add new post
+    // add new genre
     public function add(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Sanitize POST array
@@ -48,15 +48,15 @@
         // Make sure no errors
         if(empty($data['name_err'])){
           // Validated
-          if($this->brandModel->addBrand($data)){
-            flash('post_message', 'Brand Added');
-            redirect('brands');
+          if($this->genreModel->addGenre($data)){
+            flash('post_message', 'Genre Added');
+            redirect('genres');
           } else {
             die('Something went wrong');
           }
         } else {
           // Load view with errors
-          $this->view('brands/add', $data);
+          $this->view('genres/add', $data);
         }
 
       } else {
@@ -64,7 +64,7 @@
           'name' => '',
         ];
   
-        $this->view('brands/add', $data);
+        $this->view('genres/add', $data);
       }
     }
 
@@ -90,40 +90,40 @@
         // Make sure no errors
         if(empty($data['name_err'])){
             // Validated
-            if($this->brandModel->updateBrand($data)){
-              flash('post_message', 'Brand edited');
-              redirect('brands');
+            if($this->genreModel->updateGenre($data)){
+              flash('post_message', 'Genre edited');
+              redirect('genres');
             } else {
               die('Something went wrong');
             }
           } else {
             // Load view with errors
-            $this->view('brands/edit', $data);
+            $this->view('genres/edit', $data);
           }
 
       // show edit page. not a post request
       } else {
-        // Get existing brand from model
-        $brand = $this->brandModel->getBrandById($id);
+        // Get existing genre from model
+        $genre = $this->genreModel->getGenreById($id);
 
 
         $data = [
           'id' => $id,
-          'name' => $brand->name,
+          'name' => $genre->name,
         ];
   
-        $this->view('brands/edit', $data);
+        $this->view('genres/edit', $data);
       }
     }
 
     public function show($id){
-      $brand = $this->brandModel->getBrandById($id);
+      $genre = $this->genreModel->getGenreById($id);
 
       $data = [
-        'brand' => $brand,
+        'genre' => $genre,
       ];
 
-      $this->view('brands/show', $data);
+      $this->view('genres/show', $data);
     }
 
     public function delete($id){
@@ -135,14 +135,14 @@
         }
 
 
-        if($this->brandModel->deleteBrand($id)){
-          flash('post_message', 'Brand Removed');
-          redirect('brands');
+        if($this->genreModel->deleteGenre($id)){
+          flash('post_message', 'Genre Removed');
+          redirect('genres');
         } else {
           die('Something went wrong');
         }
       } else {
-        redirect('brands');
+        redirect('genres');
       }
     }
 

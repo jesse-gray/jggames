@@ -7,7 +7,7 @@ class Pages extends Controller
 
         // instantiate models
         $this->categoryModel = $this->model('Category');
-        $this->brandModel = $this->model('Brand');
+        $this->genreModel = $this->model('Genre');
         $this->productModel = $this->model('Product');
     }
 
@@ -16,8 +16,8 @@ class Pages extends Controller
         // Get categories
         $categories = $this->categoryModel->getCategories();
 
-        // Get brands
-        $brands = $this->brandModel->getBrands();
+        // Get genres
+        $genres = $this->genreModel->getGenres();
 
         // Get Products
         $products = $this->productModel->getProducts();
@@ -25,22 +25,14 @@ class Pages extends Controller
 
 
         $data = [
-            'title' => 'Ecommerce Web App',
-            'description' => 'Simple ecommerce web app',
+            'title' => 'JG Games',
+            'description' => 'Your one stop shop for gaming',
             'categories' => $categories,
-            'brands' => $brands,
+            'genres' => $genres,
             'products' => $products
           ];
         // pass view
         $this->view('pages/index', $data);
-    }
-
-    public function about()
-    {
-        $data = ['title' => 'About Us',
-        'description' => 'Store with a forum'];
-        // pass view
-        $this->view('pages/about', $data);
     }
 
     public function dashboard()

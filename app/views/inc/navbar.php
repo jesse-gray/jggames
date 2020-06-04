@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo URLROOT; ?>"><?php echo SITENAME; ?></a>
+    <a class="navbar-genre" href="<?php echo URLROOT; ?>"><?php echo SITENAME; ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,20 +11,8 @@
           <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/products/shop">Store</a>
         </li>
-          <?php if ($_SESSION['admin'] > 0) : ?>
-        <li class="nav-item">
-        <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="<?php echo URLROOT; ?>/brands/index">Brands</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
-        </li>
-            
-          <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/posts">Forum</a>
         </li>
@@ -34,18 +22,21 @@
         
         <!-- Show account and logout if logged in -->
         <?php if (isset($_SESSION['user_id'])) : ?>
-          <?php if ($_SESSION['admin'] > 0) : ?>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Manage Users</a>
-            </li>
-            
-          <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/edit/<?php echo $_SESSION['user_id']; ?>">Welcome <?php echo $_SESSION['user_name']; ?></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/cart/index">Shopping Cart</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/orders/index">Orders</a>
+          </li>
+          <?php if ($_SESSION['admin'] > 0) : ?>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/dashboard">Dashboard</a>
+            </li>
+            
+          <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
           </li>

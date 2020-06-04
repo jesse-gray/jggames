@@ -10,22 +10,34 @@
 
     // Register new User
     public function register($data) {
+      // create activation token
+      $token = md5($_POST['email'].time());
+
       // create statement
-      $this->db->query('INSERT INTO users (name, email, password) VALUES(:name, :email, :password)');
+      $this->db->query('INSERT INTO users (name, email, password, verification_token) VALUES(:name, :email, :password, :token)');
 
       // bind variables in statement
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':password', $data['password']);
+      $this->db->bind(':token', $token);
 
       // Execute query
       // in if statement so when can check that execute was succsessful
       if($this->db->execute()){
+        $this->sendEmail($token, $data['email']);
         return true;
       } else {
         return false;
       }
+    }
 
+    // Send verification email
+    public function sendEmail($token, $email){
+        var_dump('here');
+        $msg = "Welcome to JG Games\nPLease verify your email by clicking the following link: " . $URLROOT . "/users/confirm?token=$token";
+        $msg = wordwrap($msg,70);
+        mail($email,"Validate your email",$msg);
     }
 
     // Login User
@@ -87,11 +99,13 @@
     }
 
     public function updateUser($data){
-      $this->db->query('UPDATE users SET name = :name, email = :email WHERE id = :id');
+      $this->db->query('UPDATE users SET name = :name, email = :email, password = :password, admin = :admin WHERE id = :id');
       // Bind values
       $this->db->bind(':id', $data['id']);
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':email', $data['email']);
+      $this->db->bind(':password', $data['password']);
+      $this->db->bind(':admin', $data['is_admin'] == 'on' ? 1 : 0);
 
       // Execute
       if($this->db->execute()){
@@ -114,5 +128,26 @@
       }
     }
 
-    
+    public function confirmEmail($token){      
+      $this->db->query('UPDATE users SET is_verified = true WHERE verification_token = :token');
+      // Bind values
+      $this->db->bind(':token', $token);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function isUserVerified($email){
+      $this->db->query('SELECT is_verified FROM users WHERE email = :email AND is_verified = 1');
+      // Bind values
+      $this->db->bind(':email', $email);
+      if($this->db->single()){
+        return true;
+      } else {
+        return false;
+      }
+
+    }
   }

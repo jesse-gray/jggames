@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<a href="<?php echo URLROOT; ?>/posts" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
 <br>
 <h1><?php echo $data['post']->title; ?></h1>
 <div class="bg-secondary text-white p-2 mb-3">
@@ -44,10 +43,20 @@
         
     <br>
     <?php endforeach; ?>
-    <div class="col-md-6">
-      <a href="<?php echo URLROOT; ?>/posts/addComment/<?php echo $data['post']->id; ?>"  class="btn btn-primary pull-right">
-        <i class="fa fa-pencil"></i> Add Comment
-      </a>
-    </div>
+    
+    <?php if(isset($_SESSION['user_id'])): ?>
+      <div class="col-md-6">
+        <a href="<?php echo URLROOT; ?>/posts/addComment/<?php echo $data['post']->id; ?>"  class="btn btn-primary pull-right">
+          <i class="fa fa-pencil"></i> Add Comment
+        </a>
+      </div>
+    <?php else: ?>
+      <div class="col-md-6">
+        <a href="<?php echo URLROOT; ?>/users/login" class="btn btn-primary pull-right">
+          <i class="fa fa-pencil"></i> Login to add comments
+        </a>
+      </div>
+    <?php endif; ?>
+<a href="<?php echo URLROOT; ?>/posts" class="btn btn-dark"><i class="fa fa-backward"></i> Back</a>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

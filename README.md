@@ -164,7 +164,7 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 price: int
                 description: text
                 category_id: int
-                brand_id: int
+                genre_id: int
                 image_link: VARCHAR(255)
 
 
@@ -175,7 +175,7 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
                 name: VARCHAR(255)
                 
 
-1. Create a table called brand in your database enter the following columns
+1. Create a table called genre in your database enter the following columns
 
 
                 id: int, Auto_Increment, Primary_Key
