@@ -1,9 +1,9 @@
 <?php
 // DB Params
 define('DB_HOST', 'localhost');
-define('DB_USER', 'ydtstwfdne');
-define('DB_PASS', 'EVqBYxV7GK');
-define('DB_NAME', 'ydtstwfdne');
+define('DB_USER', 'root');
+define('DB_PASS', '123456');
+define('DB_NAME', 'jg_games');
 
 
 // App Root
