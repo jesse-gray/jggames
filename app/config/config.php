@@ -1,9 +1,9 @@
 <?php
 // DB Params
 define('DB_HOST', 'us-cdbr-east-05.cleardb.net');
-define('DB_USER', 'b54bc875c5fa02');
-define('DB_PASS', '2341c42e');
-define('DB_NAME', 'heroku_10be84eea94aeda');
+define('DB_USER', 'b6b6efba42ec0a');
+define('DB_PASS', '1382dc99');
+define('DB_NAME', 'heroku_2b8fd779f4bc348');
 
 
 // App Root
@@ -20,4 +20,10 @@ define('SITENAME', 'JGGames');
   define('APPVERSION', '1.0.0');
 
 
-//mysql://b54bc875c5fa02:2341c42e@us-cdbr-east-05.cleardb.net/heroku_10be84eea94aeda?reconnect=true
+//mysql://b6b6efba42ec0a:1382dc99@us-cdbr-east-05.cleardb.net/heroku_2b8fd779f4bc348?reconnect=true
+
+
+
+mysql -h us-cdbr-east-05.cleardb.net -ub54bc875c5fa02 -p2341c42e
+
+heroku addons:create cleardb:ignite --fork=mysql://root:123456@localhost.com/jg_games
