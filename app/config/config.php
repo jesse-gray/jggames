@@ -21,9 +21,3 @@ define('SITENAME', 'JGGames');
 
 
 //mysql://b6b6efba42ec0a:1382dc99@us-cdbr-east-05.cleardb.net/heroku_2b8fd779f4bc348?reconnect=true
-
-
-
-mysql -h us-cdbr-east-05.cleardb.net -ub54bc875c5fa02 -p2341c42e
-
-heroku addons:create cleardb:ignite --fork=mysql://root:123456@localhost.com/jg_games
