@@ -1,9 +1,9 @@
 <?php
 // DB Params
-define('DB_HOST', 'localhost');
-define('DB_USER', 'id13964942_root');
-define('DB_PASS', 'WtmLcga2mS%]=7#y');
-define('DB_NAME', 'id13964942_jggames');
+define('DB_HOST', 'us-cdbr-east-05.cleardb.net');
+define('DB_USER', 'b54bc875c5fa02');
+define('DB_PASS', '2341c42e');
+define('DB_NAME', 'heroku_10be84eea94aeda');
 
 
 // App Root
@@ -18,3 +18,6 @@ define('SITENAME', 'JGGames');
 
   // App Version
   define('APPVERSION', '1.0.0');
+
+
+//mysql://b54bc875c5fa02:2341c42e@us-cdbr-east-05.cleardb.net/heroku_10be84eea94aeda?reconnect=true
