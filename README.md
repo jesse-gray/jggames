@@ -1,11 +1,5 @@
-# phpwebapp
-
-This is a PHP MVC web application
-This application is a eccomerce store with a user forum
-
-A login is required for accesing the forum
-
-An admin account is required for user or product editing
+# watsonmvc
+This is a PHP MVC framework
 
 
 # Initial set up
@@ -121,75 +115,8 @@ If using VSCode I recommend downloading the extension PHP Intellisense. by Felix
 
         RewriteBase /<your app name>/public
 
+    
+# Models
 
-# App Set Up
-
-## Database Set Up
-
-1. Create a table called users in your database enter the following columns
-
-
-                id: int, Auto_Increment, Primary_Key
-                name: VARCHAR(255)
-                email: VARCHAR(255)
-                password: VARCHAR(255)
-                created_at: DateTime, default = current timestamp
-                admin: BOOLEAN, default = 0
-
-
-1. Create a table called posts in your database, enter the following columns
-
-
-                id: int, Auto_Increment, Primary_Key
-                user_id: int
-                title: VARCHAR(255)
-                body: text
-                created_at: DateTime, default = current timestamp
-
-1. Create a table called comments in your database, enter the following columns
-
-
-                id: int, Auto_Increment, Primary_Key
-                user_id: int
-                post_id: int
-                body: text
-                created_at: DateTime, default = current timestamp
-
-1. Create a table called products in your database, enter the following columns
-
-
-                id: int, Auto_Increment, Primary_Key
-                name: VARCHAR(255)
-                quantity: int
-                price: int
-                description: text
-                category_id: int
-                genre_id: int
-                image_link: VARCHAR(255)
-
-
-1. Create a table called category in your database enter the following columns
-
-
-                id: int, Auto_Increment, Primary_Key
-                name: VARCHAR(255)
-                
-
-1. Create a table called genre in your database enter the following columns
-
-
-                id: int, Auto_Increment, Primary_Key
-                name: VARCHAR(255)
-
-
-## Webapp Set Up
-
-1. In your browser go to http://localhost/phpwebapp.
-
-1. Register user.
-
-1. Go to phpmyadmin and edit your user.
-
-1. Change the admin of your user from 0 to 1.
-
+The Models folder is currently empty in this framework so github ignored it. Please add your owwn Models folder within app and utilize that for model storage.
 

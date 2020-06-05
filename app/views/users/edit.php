@@ -23,25 +23,26 @@
             <span class="invalid-feedback"><?php echo $data['confirm_password_err']; ?></span>
         </div>
 
-        <?php if ($_SESSION['admin'] > 0) : ?>
+        <!--Check if admin - can make others admin-->
+        <?php if ($_SESSION['admin'] > 0): ?>
             <div class="form-group ml-4 mt-3">
                 <input type="checkbox" class="form-check-input" name="is_admin">
                 <label class="form-check-label" for="is_admin">Is Admin</label>
             </div>
         <?php endif; ?>
-            <br>
-            <input type="submit" class="btn btn-success pull-right" value="Submit">
-            <button type="button" class="btn btn-primary btn-danger" data-toggle="modal" data-target="#exampleModal">
+        <br>
+        <input type="submit" class="btn btn-success pull-right" value="Submit">
+        <button type="button" class="btn btn-primary btn-danger" data-toggle="modal" data-target="#confirm_delete">
             Delete
         </button>        
     </form>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog" aria-labelledby="Confirm Delete" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete User</h5>
+                <h5 class="modal-title" id="confirm_delete_label">Confirm Delete User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -59,5 +60,5 @@
         </div>
     </div>
   </div>
-  <a href="<?php echo URLROOT; ?>/posts" class="btn btn-dark m-3"><i class="fa fa-backward"></i> Back</a>
+  <a href="<?php echo URLROOT; ?>/users/show<?php echo $data['id']; ?>" class="btn btn-dark m-3"><i class="fa fa-backward"></i> Back</a>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

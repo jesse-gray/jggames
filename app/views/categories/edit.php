@@ -12,5 +12,5 @@
       <input type="submit" class="btn btn-success" value="Submit">
     </form>
   </div>
-  <a href="<?php echo URLROOT; ?>/categories" class="btn btn-dark"><i class="fa fa-backward"></i> Back</a>
+<a href="<?php echo URLROOT; ?>/categories/manage" class="btn btn-dark m-3"><i class="fa fa-backward"></i> Back</a>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

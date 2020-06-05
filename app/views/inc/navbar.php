@@ -18,10 +18,9 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav ml-auto">
-        
+      <ul class="navbar-nav ml-auto">        
         <!-- Show account and logout if logged in -->
-        <?php if (isset($_SESSION['user_id'])) : ?>
+        <?php if (isset($_SESSION['user_id'])): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/edit/<?php echo $_SESSION['user_id']; ?>">Welcome <?php echo $_SESSION['user_name']; ?></a>
           </li>
@@ -31,18 +30,15 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/orders/index">Orders</a>
           </li>
-          <?php if ($_SESSION['admin'] > 0) : ?>
+          <?php if ($_SESSION['admin'] > 0): ?>
             <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/dashboard">Dashboard</a>
-            </li>
-            
+            </li>            
           <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
           </li>
-          
-
-        <?php else : ?>
+        <?php else: ?>
           <!-- Show register and log in if user not logged in -->
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/register">Register</a>
@@ -55,4 +51,3 @@
     </div>
   </div>
 </nav>
-

@@ -2,7 +2,6 @@
 
 <div class="row">
   <div class="col">
-
     <div class="jumbotron jumbotron-flud text-center">
       <div class="container">
         <h1 class="display-3"><?php echo $data['title']; ?></h1>
@@ -10,9 +9,8 @@
       </div>
     </div>
 
-
     <!-- <div class="home-grid-area">
-      <?php foreach ($data['products'] as $product) : ?>
+      <?php foreach ($data['products'] as $product): ?>
 
         <div class="card">
         <img class="card-img-top" src="<?php echo $product->image_link; ?>" alt="altPic"/>
@@ -26,11 +24,5 @@
 
         
       <?php endforeach; ?>
-    </div>
-
-  </div> -->
-
-
-
 
   <?php require APPROOT . '/views/inc/footer.php'; ?>

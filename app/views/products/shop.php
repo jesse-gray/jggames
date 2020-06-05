@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-
 <div class="row">
 <div class="col-3" style="width: 18rem;">
         <h4>Search</h4>
@@ -21,11 +20,8 @@
         </form>
     </div>
   <div class="col">
-
-
     <div class="home-grid-area">
-      <?php foreach ($data['products'] as $product) : ?>
-
+      <?php foreach ($data['products'] as $product): ?>
         <div class="card">
         <img class="card-img-top" src="<?php echo $product->image_link; ?>" alt="altPic"/>
           <div class="card-body">
@@ -34,15 +30,9 @@
             <h4 class="card-text font-weight-bold text-danger "><?php echo "$" . $product->price; ?></h4>
             <a href="<?php echo URLROOT; ?>/products/show/<?php echo $product->id; ?>" class="btn btn-primary btn-block">View More Details</a>
           </div>
-        </div>
-
-        
+        </div>        
       <?php endforeach; ?>
     </div>
-
   </div>
-
-
-
 
   <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -1,8 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-  <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $data['post_id'] ?>" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
   <div class="card card-body bg-light mt-5">
-    <h2>Edit Comment</h2>
-    
+    <h2>Edit Comment</h2>    
     <form action="<?php echo URLROOT; ?>/posts/editComment/<?php echo $data['id']; ?>" method="post">
       <div class="form-group">
         <label for="body">Body: <sup>*</sup></label>
@@ -11,5 +9,6 @@
       </div>
       <input type="submit" class="btn btn-success" value="Submit">
     </form>
-  </div>
+  </div>  
+  <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $data['id']; ?>" class="btn btn-dark m-3"><i class="fa fa-backward"></i> Back</a>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

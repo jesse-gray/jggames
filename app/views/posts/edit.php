@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-  <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $data['id']; ?>" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
   <div class="card card-body bg-light mt-5">
     <h2>Edit Post</h2>
     <p>Create a post with this form</p>
@@ -17,4 +16,5 @@
       <input type="submit" class="btn btn-success" value="Submit">
     </form>
   </div>
+  <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $data['id']; ?>" class="btn btn-dark m-3"><i class="fa fa-backward"></i> Back</a>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -4,8 +4,9 @@
       <h1>Orders</h1>
     </div>
   </div>
+  
   <!-- loop through products -->
-  <?php foreach($data['orders'] as $order) : ?>
+  <?php foreach ($data['orders'] as $order): ?>
     <div class="card card-body mb-3">
       <h4 class="card-title">Order #<?php echo $order->order_id; ?></h4>
       <p class="card-text">$<?php echo $order->total; ?></p>

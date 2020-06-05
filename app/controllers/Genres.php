@@ -1,149 +1,184 @@
 <?php
-  class Genres extends Controller {
-    public function __construct(){
-      // this makes all forums only for logged in users
-      if(!isLoggedIn()){
-        redirect('users/login');
-      }
+class Genres extends Controller
+{
+    public function __construct()
+    {
+        // Only for logged in users
+        if (!isLoggedIn())
+        {
+            redirect('users/login');
+        }
 
         // Check for admin
-        if(!$_SESSION['admin'] > 0){
+        if (!$_SESSION['admin'] > 0)
+        {
             redirect('pages');
         }
 
-      // instantiate genre
-      $this->genreModel = $this->model('Genre');
+        // Instantiate genre
+        $this->genreModel = $this->model('Genre');
     }
 
-    public function index(){
-      // Get genres
-      $genres = $this->genreModel->getGenres();
+    public function index()
+    {
+        // Get genres
+        $genres = $this->genreModel->getGenres();
 
-      // set data as genre
-      $data = [
-        'genres' => $genres
-      ];
+        // set data as genre
+        $data = ['genres' => $genres];
 
-      $this->view('genres/index', $data);
+        $this->view('genres/index', $data);
     }
 
     // add new genre
-    public function add(){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    public function add()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        $data = [
-          'name' => trim($_POST['name']),
-          'name_err' => ''
+            $data = ['name' => trim($_POST['name']) , 'name_err' => ''
 
-        ];
+            ];
 
-        // Validate data
-        if(empty($data['name'])){
-          $data['name_err'] = 'Please enter name';
+            // Validate data
+            if (empty($data['name']))
+            {
+                $data['name_err'] = 'Please enter name';
+            }
+
+            // Make sure no errors
+            if (empty($data['name_err']))
+            {
+                // Validated
+                if ($this->genreModel->addGenre($data))
+                {
+                    flash('post_message', 'Genre Added');
+                    redirect('genres');
+                }
+                else
+                {
+                    die('Something went wrong');
+                }
+            }
+            else
+            {
+                // Load view with errors
+                $this->view('genres/add', $data);
+            }
         }
+        else
+        {
+            $data = ['name' => '', ];
 
-
-        // Make sure no errors
-        if(empty($data['name_err'])){
-          // Validated
-          if($this->genreModel->addGenre($data)){
-            flash('post_message', 'Genre Added');
-            redirect('genres');
-          } else {
-            die('Something went wrong');
-          }
-        } else {
-          // Load view with errors
-          $this->view('genres/add', $data);
+            $this->view('genres/add', $data);
         }
-
-      } else {
-        $data = [
-          'name' => '',
-        ];
-  
-        $this->view('genres/add', $data);
-      }
     }
 
     // very similar to add
-    public function edit($id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      // Sanitize POST array
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    public function edit($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      $data = [
-        'id' => $id,
-        'name' => trim($_POST['name']),
-        'name_err' => ''
+            $data = ['id' => $id, 'name' => trim($_POST['name']) , 'name_err' => ''
 
-      ];
+            ];
 
-      // Validate data
-      if(empty($data['name'])){
-        $data['name_err'] = 'Please enter name';
-      }
-
-
-        // Make sure no errors
-        if(empty($data['name_err'])){
-            // Validated
-            if($this->genreModel->updateGenre($data)){
-              flash('post_message', 'Genre edited');
-              redirect('genres');
-            } else {
-              die('Something went wrong');
+            // Validate data
+            if (empty($data['name']))
+            {
+                $data['name_err'] = 'Please enter name';
             }
-          } else {
-            // Load view with errors
-            $this->view('genres/edit', $data);
-          }
 
-      // show edit page. not a post request
-      } else {
-        // Get existing genre from model
+            // Make sure no errors
+            if (empty($data['name_err']))
+            {
+                // Validated
+                if ($this->genreModel->updateGenre($data))
+                {
+                    flash('post_message', 'Genre edited');
+                    redirect('genres');
+                }
+                else
+                {
+                    die('Something went wrong');
+                }
+            }
+            else
+            {
+                // Load view with errors
+                $this->view('genres/edit', $data);
+            }            
+        }
+        else
+        {
+            // Get existing genre from model
+            $genre = $this->genreModel->getGenreById($id);
+
+            $data = ['id' => $id, 'name' => $genre->name, ];
+
+            $this->view('genres/edit', $data);
+        }
+    }
+
+    public function show($id)
+    {
         $genre = $this->genreModel->getGenreById($id);
 
+        $data = ['genre' => $genre, ];
 
-        $data = [
-          'id' => $id,
-          'name' => $genre->name,
-        ];
-  
-        $this->view('genres/edit', $data);
-      }
+        $this->view('genres/show', $data);
     }
 
-    public function show($id){
-      $genre = $this->genreModel->getGenreById($id);
+    public function delete($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
 
-      $data = [
-        'genre' => $genre,
-      ];
+            // Check for admin
+            if (!$_SESSION['admin'] > 0)
+            {
+                redirect('pages/index');
+            }
 
-      $this->view('genres/show', $data);
+            if ($this->genreModel->deleteGenre($id))
+            {
+                flash('post_message', 'Genre Removed');
+                redirect('genres');
+            }
+            else
+            {
+                die('Something went wrong');
+            }
+        }
+        else
+        {
+            redirect('genres');
+        }
     }
 
-    public function delete($id){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function manage()
+    {
+        if (!isLoggedIn())
+        {
+            redirect('users/login');
+        }
+        else if ($_SESSION['admin'] > 0)
+        {
+            $genres = $this->genreModel->getGenres();
 
-          // Check for admin
-        if(!$_SESSION['admin'] > 0){
+            // set data as products
+            $data = ['genres' => $genres];
+            $this->view('genres/manage', $data);
+        }
+        else
+        {
             redirect('pages/index');
         }
-
-
-        if($this->genreModel->deleteGenre($id)){
-          flash('post_message', 'Genre Removed');
-          redirect('genres');
-        } else {
-          die('Something went wrong');
-        }
-      } else {
-        redirect('genres');
-      }
     }
+}
 
-  }

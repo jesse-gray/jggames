@@ -10,27 +10,27 @@
     Editable
   </div>
   <ul class="list-group list-group-flush">
-  <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/categories/index">Categories</a>
-            </li>
-            <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/genres/index">Genres</a>
-            </li>
-            <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/products/index">Products</a>
-            </li>
-            <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Users</a>
-            </li>
-            <li class="list-group-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/orders/manage">Orders</a>
-            </li>
-
+    <li class="list-group-item">
+      <a class="nav-link" href="<?php echo URLROOT; ?>/categories/manage">Categories</a>
+    </li>
+    <li class="list-group-item">
+      <a class="nav-link" href="<?php echo URLROOT; ?>/genres/manage">Genres</a>
+    </li>
+    <li class="list-group-item">
+      <a class="nav-link" href="<?php echo URLROOT; ?>/products/manage">Products</a>
+    </li>
+    <li class="list-group-item">
+      <a class="nav-link" href="<?php echo URLROOT; ?>/users/manage">Users</a>
+    </li>
+    <li class="list-group-item">
+      <a class="nav-link" href="<?php echo URLROOT; ?>/orders/manage">Orders</a>
+    </li>
+    <li class="list-group-item">
+      <a class="nav-link" href="<?php echo URLROOT; ?>/posts/manage">Posts</a>
+    </li>
   </ul>
 </div>
     </div>
-</div>
-  
- 
+</div> 
   
 <?php require APPROOT . '/views/inc/footer.php'; ?>

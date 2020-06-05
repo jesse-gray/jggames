@@ -4,14 +4,10 @@
       <div class="card card-body bg-light mt-5">
         <h2>Create An Account</h2>
         <p>Please fill out this form to register with us</p>
-        <!-- action calls where this form will be passed. controller/function HTTPMethod -->
         <form action="<?php echo URLROOT; ?>/users/register" method="post">
           <div class="form-group">
-            <!-- sup sits astrix higher on line. this is like a generic required field -->
             <label for="name">Name: <sup>*</sup></label>
-            <!-- dynamic class using ternary in php. class is 'is-invalid. using value will hold previously entered value if there is a error -->
             <input type="text" name="name" class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['name']; ?>">
-            <!-- Show error -->
             <span class="invalid-feedback"><?php echo $data['name_err']; ?></span>
           </div>
           <div class="form-group">

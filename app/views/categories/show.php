@@ -2,8 +2,7 @@
 <br>
 <h1><?php echo $data['category']->name; ?></h1>
 
-
-<?php if ($_SESSION['admin'] > 0) : ?>
+<?php if ($_SESSION['admin'] > 0): ?>
   <hr>
   <a href="<?php echo URLROOT; ?>/categories/edit/<?php echo $data['category']->id; ?>" class="btn btn-dark">Edit</a>
 
@@ -14,7 +13,5 @@
   <br>
 <?php endif; ?>
 <a href="<?php echo URLROOT; ?>/categories" class="btn btn-dark mt-3"><i class="fa fa-backward"></i> Back</a>
-
-
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

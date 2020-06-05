@@ -6,9 +6,8 @@
     <div class="col-md-6">
     </div>
   </div>
+  
   <!-- loop through products -->
-
-
   <table class="table table-hover">
   <thead>
     <tr>
@@ -18,17 +17,17 @@
     </tr>
   </thead>
   <tbody>  
-    <?php foreach($data['products'] as $products) : ?>
+    <?php foreach ($data['products'] as $products): ?>
         <tr>
           <td><?php echo $products->name; ?></td>
           <td><?php echo $products->quantity; ?></td>
-          <td><?php echo "$" . $products->price;?></td>
+          <td><?php echo "$" . $products->price; ?></td>
         </tr>
     <?php endforeach; ?>
     <tr>
         <td></td>
         <td><span style="font-weight: bold;">Total</span></td>
-        <td><?php echo "$" . number_format(array_sum(array_column($data['products'], 'price')), 2);?></td>
+        <td><?php echo "$" . number_format(array_sum(array_column($data['products'], 'price')) , 2); ?></td>
     </tr>
   </tbody>
   </table>
@@ -38,28 +37,28 @@
   <div class="form-row">
       <div class="form-group col-md-2">
         <label for="inputStreetNumber">Street Number</label>
-        <input type="text" class="form-control <?php echo (!empty($data['street_number_err'])) ? 'is-invalid' : ''; ?>" id="inputStreetNumber" name="inputStreetNumber" placeholder="10">
+        <input type="text" class="form-control <?php echo (!empty($data['street_number_err'])) ? 'is-invalid' : ''; ?>" id="inputStreetNumber" name="inputStreetNumber" placeholder="10" value=<?php echo $data['street_number']; ?>>
       <span class="invalid-feedback"><?php echo $data['street_number_err']; ?></span>
       </div>
       <div class="form-group col-md-10">
         <label for="inputStreetName">Street Name</label>
-        <input type="text" class="form-control <?php echo (!empty($data['street_name_err'])) ? 'is-invalid' : ''; ?>" id="inputStreetName" name="inputStreetName" placeholder="Main Street">
+        <input type="text" class="form-control <?php echo (!empty($data['street_name_err'])) ? 'is-invalid' : ''; ?>" id="inputStreetName" name="inputStreetName" placeholder="Main Street" value=<?php echo $data['street_name']; ?>>
       <span class="invalid-feedback"><?php echo $data['street_name_err']; ?></span>
       </div>
   </div>
   <div class="form-group">
     <label for="inputSuburb">Suburb</label>
-    <input type="text" class="form-control" id="inputSuburb" name="inputSuburb" placeholder="Taradale, Ahuriri, Meeanee">
+    <input type="text" class="form-control" id="inputSuburb" name="inputSuburb" placeholder="Taradale, Ahuriri, Meeanee" value=<?php echo $data['suburb']; ?>>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control <?php echo (!empty($data['city_err'])) ? 'is-invalid' : ''; ?>" id="inputCity" name="inputCity" placeholder="Napier">
+      <input type="text" class="form-control <?php echo (!empty($data['city_err'])) ? 'is-invalid' : ''; ?>" id="inputCity" name="inputCity" placeholder="Napier" value=<?php echo $data['city']; ?>>
       <span class="invalid-feedback"><?php echo $data['city_err']; ?></span>
     </div>
     <div class="form-group col-md-4">
       <label for="inputRegion">Region</label>
-      <select id="inputRegion" name="inputRegion" class="form-control <?php echo (!empty($data['region_err'])) ? 'is-invalid' : ''; ?>">
+      <select id="inputRegion" name="inputRegion" class="form-control <?php echo (!empty($data['region_err'])) ? 'is-invalid' : ''; ?>" value=<?php echo $data['street_name']; ?>>
       <span class="invalid-feedback"><?php echo $data['region_err']; ?></span>
         <option selected disabled hidden>Choose...</option>
         <option>Northland</option>
@@ -82,7 +81,7 @@
     </div>
     <div class="form-group col-md-2">
       <label for="inputPostcode">Postcode</label>
-      <input type="text" class="form-control <?php echo (!empty($data['postcode_err'])) ? 'is-invalid' : ''; ?>" id="inputPostcode" name="inputPostcode">
+      <input type="text" class="form-control <?php echo (!empty($data['postcode_err'])) ? 'is-invalid' : ''; ?>" id="inputPostcode" name="inputPostcode" value=<?php echo $data['postcode']; ?>>
       <span class="invalid-feedback"><?php echo $data['postcode_err']; ?></span>
     </div>
   </div>
