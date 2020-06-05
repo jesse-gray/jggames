@@ -138,16 +138,18 @@ class Users extends Controller
                 $data['email_err'] = 'No user found';
             }
 
-            //Check user is verified
+            // Check user is verified
             if ($this->userModel->isUserVerified($data['email']))
             {
-                //User verified
+                // User verified
                 
             }
             else
             {
-                //Not verified
-                $data['email_err'] = 'Email is not verified, please check your emails';
+                // Not verified
+                // In future iterations this will be uncommented, which would require the user to be verified before loggin in, 
+                // In this iteration however, they can login while being unverified
+                //$data['email_err'] = 'Email is not verified, please check your emails';
             }
 
             // Make sure errors are empty
