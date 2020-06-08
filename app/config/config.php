@@ -1,9 +1,9 @@
 <?php
 // DB Params
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '123456');
-define('DB_NAME', 'jg_games');
+define('DB_HOST', 'us-cdbr-east-05.cleardb.net');
+define('DB_USER', 'b6b6efba42ec0a');
+define('DB_PASS', '1382dc99');
+define('DB_NAME', 'heroku_2b8fd779f4bc348');
 
 
 // App Root
